@@ -50,14 +50,14 @@ const editTalker = async (req, res) => {
   res.status(200).json(talker);
 };
 
-// requisito 6
+// Requisito 6
 const deleteTalker = async (req, res) => {
   const { id } = req.params;
 
   const fileTalkers = await fs.readFile(talkerJson, 'utf-8');
   const talkers = JSON.parse(fileTalkers);
 
-  const remainingTalkers = talkers.find((talker) => talker.id !== +id);
+  const remainingTalkers = talkers.filter((talker) => talker.id !== +id);
 
   await fs.writeFile('./talker.json', JSON.stringify(remainingTalkers));
 
