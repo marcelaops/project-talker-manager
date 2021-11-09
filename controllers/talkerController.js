@@ -20,4 +20,16 @@ const getTalkerById = async (req, res) => {
   res.status(200).json(talker);
 };
 
-module.exports = { getAllTalkers, getTalkerById };
+// Requisito 4
+const postTalker = async (req, res) => {
+  const fileTalkers = await fs.readFile('./talker.json', 'utf-8');
+  const talkers = JSON.parse(fileTalkers);
+
+  const newTalker = { ...req.body, id: talkers.length + 1 };
+
+  await fs.writeFile('./talker.json', JSON.stringify([...talkers, newTalker]));
+
+  res.status(201).json(newTalker);
+};
+
+module.exports = { getAllTalkers, getTalkerById, postTalker };
