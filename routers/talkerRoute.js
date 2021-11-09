@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { getAllTalkers } = require('../controllers/talkerController');
+const { getAllTalkers, getTalkerById } = require('../controllers/talkerController');
 
 router.get('/', getAllTalkers);
+router.get('/:id', getTalkerById);
 
 module.exports = router;
