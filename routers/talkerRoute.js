@@ -6,6 +6,7 @@ const {
   postTalker,
   editTalker,
   deleteTalker,
+  searchTalker,
 } = require('../controllers/talkerController');
 
 const { 
@@ -18,6 +19,7 @@ const {
 const { tokenValidation } = require('../middlewares/tokenValidation');
 
 router.get('/', getAllTalkers); // Requisito 1
+router.get('/search', tokenValidation, searchTalker); // Requisito 7
 router.get('/:id', getTalkerById); // Requisito 2
 
 // Requisito 4

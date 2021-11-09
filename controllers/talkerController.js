@@ -64,4 +64,27 @@ const deleteTalker = async (req, res) => {
   res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
 };
 
-module.exports = { getAllTalkers, getTalkerById, postTalker, editTalker, deleteTalker };
+// Requisito 7
+const searchTalker = async (req, res) => {
+  const { q } = req.query;
+
+  const fileTalkers = await fs.readFile(talkerJson, 'utf-8');
+  const talkers = JSON.parse(fileTalkers);
+
+  if (!q) return res.status(200).json(talkers);
+ 
+  const filteredTalkers = talkers.filter((talker) => talker.name.includes(q));
+
+  if (!filteredTalkers) return res.status(200).json([]);
+
+  res.status(200).json(filteredTalkers);
+};
+
+module.exports = { 
+  getAllTalkers,
+  getTalkerById,
+  postTalker,
+  editTalker,
+  deleteTalker,
+  searchTalker,
+};
