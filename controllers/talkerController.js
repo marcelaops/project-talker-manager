@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
 
+// Requisito 1
 const getAllTalkers = async (_req, res) => {
   const fileTalkers = await fs.readFile('./talker.json', 'utf-8');
   const talkers = JSON.parse(fileTalkers);
@@ -7,6 +8,7 @@ const getAllTalkers = async (_req, res) => {
   return res.status(200).json(talkers);
 };
 
+// Requisito 2
 const getTalkerById = async (req, res, next) => {
   const { id } = req.params;
   const fileTalkers = await fs.readFile('./talker.json', 'utf-8');
