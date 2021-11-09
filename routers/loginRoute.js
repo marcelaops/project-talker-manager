@@ -1,6 +1,6 @@
-const router = require('express').Router();
-const { getAllTalkers } = require('../controllers/talkerController');
+// const router = require('express').Router();
+// // const { login } = require('../controllers/');
 
-router.get('/', getAllTalkers);
+// // router.post('/', login);
 
-module.exports = router;
+// module.exports = router;
