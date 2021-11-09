@@ -50,4 +50,18 @@ const editTalker = async (req, res) => {
   res.status(200).json(talker);
 };
 
-module.exports = { getAllTalkers, getTalkerById, postTalker, editTalker };
+// requisito 6
+const deleteTalker = async (req, res) => {
+  const { id } = req.params;
+
+  const fileTalkers = await fs.readFile(talkerJson, 'utf-8');
+  const talkers = JSON.parse(fileTalkers);
+
+  const remainingTalkers = talkers.find((talker) => talker.id !== +id);
+
+  await fs.writeFile('./talker.json', JSON.stringify(remainingTalkers));
+
+  res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
+};
+
+module.exports = { getAllTalkers, getTalkerById, postTalker, editTalker, deleteTalker };

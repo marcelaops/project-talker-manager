@@ -1,16 +1,20 @@
 const router = require('express').Router();
+
 const { 
   getAllTalkers,
   getTalkerById,
   postTalker,
   editTalker,
+  deleteTalker,
 } = require('../controllers/talkerController');
+
 const { 
   nameValidation, 
   ageValidation, 
   talkValidation,
   watchedAtRateValidation,
 } = require('../middlewares/newTalkerValidation');
+
 const { tokenValidation } = require('../middlewares/tokenValidation');
 
 router.get('/', getAllTalkers); // Requisito 1
@@ -38,5 +42,8 @@ router.put(
   watchedAtRateValidation,
   editTalker,
 );
+
+// Requisito 6
+router.delete('/:id', tokenValidation, deleteTalker);
 
 module.exports = router;
